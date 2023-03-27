@@ -9,4 +9,3 @@ export const postDataAPI = async (url) => {
     )
     return res
 }
-

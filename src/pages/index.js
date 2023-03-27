@@ -13,6 +13,7 @@ export default function Home() {
 
 
     const getShortUrl = async (longUrl) => {
+
         if(!validateUrlFormat(longUrl)){
             console.log("Invalid Url Format")
             toast.error('Invalid Url Format')
@@ -21,6 +22,11 @@ export default function Home() {
         setShortUrl('')
         setRequestIsMade(true)
         const response =  await  postDataAPI(longUrl);
+        if(response.data.message){
+            toast.error(response.data.message)
+            return
+        }
+
         setShortUrl(response.data.link)
     }
 
@@ -75,9 +81,9 @@ export default function Home() {
               //     center all the content center
               <div className="col-12 d-flex justify-content-center">
                   <div className="row">
-                    <alert className="alert alert-success" role="alert">
+                    <a href={shortUrl} target="_blank" rel="noreferrer" className="alert alert-success" role="alert">
                         {shortUrl}
-                    </alert>
+                    </a>
                       <button className="btn btn-success" type="button" id="button-addon2"
                               onClick={() => navigator.clipboard.writeText(shortUrl)}
                       >Copy</button>
