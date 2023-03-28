@@ -15,8 +15,7 @@ export default function Home() {
     const getShortUrl = async (longUrl) => {
 
         if(!validateUrlFormat(longUrl)){
-            console.log("Invalid Url Format")
-            toast.error('Invalid Url Format')
+            toast.error('Please enter a valid url')
             return
         }
         setShortUrl('')
@@ -45,7 +44,6 @@ export default function Home() {
 
             <div className="row ">
                 <div className="col-12 m-4">
-                    {/* white text */}
                     <h1 className="text-center display-3 text-white">URL Shortener</h1>
                 </div>
             </div>
@@ -64,7 +62,6 @@ export default function Home() {
                 </div>
                 </div>
 
-            {/*  a gif to load while the url is being shortened */}
               {requestIsMade && !shortUrl && (
                     <div className="col-12 d-flex justify-content-center">
                         <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
@@ -85,13 +82,14 @@ export default function Home() {
                         {shortUrl}
                     </a>
                       <button className="btn btn-success" type="button" id="button-addon2"
-                              onClick={() => navigator.clipboard.writeText(shortUrl)}
+                              onClick={() =>
+                                    {
+                                      navigator.clipboard.writeText(shortUrl)
+                                      toast.success('Copied to clipboard')
+                                    }
+                              }
                       >Copy</button>
                     </div>
-
-
-
-              {/*    copy button */}
 
 
 
@@ -113,7 +111,7 @@ export default function Home() {
 
 
 
-      {/*</main>*/}
+
     </>
   )
 }
